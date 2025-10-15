@@ -1,23 +1,14 @@
-Aqui está o seu código **CSS completo**, unindo todas as suas solicitações: **header fixo**, design **moderno e responsivo**, e os **cards do catálogo centralizados**.
 
-Para que o ícone de carrinho (`.cart-icon-btn`) funcione, não se esqueça de incluí-lo no seu HTML e de adicionar o link para a biblioteca Font Awesome, conforme mencionei.
-
------
-
-## Código CSS Completo (`Home.css`)
-
-```css
-/* --- ESTILOS GLOBAIS E VARIÁVEIS --- */
 html, body {
     height: 100%;
     margin: 0;
     width: 100%;
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Adicionado para evitar scroll horizontal */
+    overflow-x: hidden;
 }
 
 span {
-    color: #FF5722; /* Define a cor padrão para o span (laranja) */
+    color: #FF5722; 
 }
 
 :root {
@@ -25,7 +16,7 @@ span {
     --secondary-orange: #FF5722;
     --light-blue: #B0D0E7;
     --light-orange: #FFB74D;
-    --background-gray: #f7f9fc; /* Cor de fundo ligeiramente mais moderna */
+    --background-gray: #f7f9fc; 
 }
 
 * {
@@ -48,15 +39,15 @@ a {
     overflow: hidden;
 }
 
-/* --- HEADER (FIXO E MODERNO) --- */
+
 .tt-header {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    padding: 15px 5%; /* Ajustado o padding */
+    padding: 15px 5%; 
     background-color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Sombra mais moderna */
-    position: sticky; /* O HEADER ESTÁ FIXO */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+    position: sticky; 
     top: 0;
     z-index: 50; 
     transition: padding 0.3s;
@@ -65,16 +56,16 @@ a {
 .header-right-side {
     display: flex;
     align-items: center;
-    gap: 30px; /* Reduzido o gap */
+    gap: 30px; 
 }
 
-/* ÍCONE DO CARRINHO ESTÁTICO */
+
 .cart-icon-btn {
     background: none;
     border: none;
     cursor: pointer;
     color: var(--primary-blue);
-    font-size: 1.6em; /* Tamanho ajustado para o header */
+    font-size: 1.6em;
     padding: 5px;
     position: relative;
     transition: color 0.3s, transform 0.2s;
@@ -147,7 +138,8 @@ a {
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 25px; /* Botões mais modernos e arredondados */
+    border-radius: 25px; 
+
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
@@ -176,7 +168,8 @@ a {
     box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
 }
 
-/* --- HERO SECTION --- */
+
+
 .tt-hero-section {
     display: flex;
     justify-content: space-around;
@@ -270,7 +263,8 @@ a {
     transform: rotate(15deg);
 }
 
-/* --- STATS BAR --- */
+
+
 .tt-stats-bar {
     display: flex;
     justify-content: center;
@@ -292,7 +286,8 @@ a {
     font-weight: 500;
 }
 
-/* --- READY TO VIEW --- */
+
+
 .tt-ready-to-view {
     text-align: center;
     padding: 80px 5%;
@@ -321,7 +316,7 @@ a {
     transform: scale(1.05);
 }
 
-/* --- ABOUT SECTION --- */
+
 .tt-about-section {
     padding: 80px 5%;
     background-color: var(--primary-blue);
@@ -362,7 +357,8 @@ a {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     margin-top: 30px;
     color: white;
-    border-radius: 8px; /* Adicionado para modernizar */
+    border-radius: 8px;
+    
 }
 
 .quote-icon {
@@ -372,7 +368,8 @@ a {
     color: var(--secondary-orange);
 }
 
-/* --- PRODUCTS SECTION (PORQUÊ ESCOLHER) --- */
+
+
 .tt-products-section {
     padding: 80px 5%;
     text-align: center;
@@ -399,13 +396,13 @@ a {
 
 .product-card {
     background-color: white;
-    border: none; /* Removido borda */
-    border-radius: 15px; /* Mais arredondado */
+    border: none;
+    border-radius: 15px;
     padding: 30px;
     max-width: 350px;
     text-align: left;
     transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Sombra moderna */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
 }
 
 .product-card:hover {
@@ -453,12 +450,11 @@ a {
 }
 
 
-/* --- CATÁLOGO COMPLETO (Seção 7 - Dinâmica) --- */
+
 .tt-catalog-section {
     padding: 80px 5%;
     background-color: var(--background-gray);
     text-align: center;
-    /* NOVO: Centraliza o conteúdo (grid) em PC */
     display: flex; 
     flex-direction: column;
     align-items: center; 
@@ -475,8 +471,15 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 40px;
-    max-width: 1200px; /* Limita a largura do grid em desktop */
-    width: 100%; /* Garante que o grid ocupe a largura máxima permitida */
+    max-width: 1200px; 
+    width: 100%;
+}
+
+
+
+.enhanced-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 .enhanced-card {
@@ -489,17 +492,12 @@ a {
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 400px;
 }
 
-.enhanced-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-
-/* Slider/Image styles */
 .slider-container {
     position: relative;
-    height: 250px; 
+    height: 200px; 
     overflow: hidden;
     border-bottom: 1px solid #eee;
 }
@@ -507,9 +505,11 @@ a {
 .slider-image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; 
     transition: opacity 0.5s ease-in-out; 
 }
+
+
 
 .slider-indicators {
     position: absolute;
@@ -608,7 +608,7 @@ a {
 }
 
 
-/* --- FOOTER --- */
+
 .tt-footer {
     background-color: #222;
     color: white;
@@ -663,7 +663,7 @@ a {
     color: #888;
 }
 
-/* --- MOBILE SIDEBAR --- */
+
 .mobile-sidebar {
     position: fixed;
     top: 0;
@@ -713,7 +713,7 @@ a {
     margin-top: 30px;
     width: 100%;
     display: block; 
-    border-radius: 25px; /* Consistente */
+    border-radius: 25px; 
 }
 
 .sidebar-overlay {
@@ -731,7 +731,6 @@ a {
 }
 
 
-/* --- SHOPPING CART MODAL --- */
 .cart-modal-overlay {
     position: fixed;
     top: 0;
@@ -748,7 +747,7 @@ a {
 .cart-modal {
     background-color: white;
     padding: 30px;
-    border-radius: 15px; /* Mais arredondado */
+    border-radius: 15px; 
     width: 90%;
     max-width: 600px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -768,13 +767,13 @@ a {
 
 .modal-header-controls h2 {
     color: var(--primary-blue);
-    font-size: 1.5em; /* Tamanho ajustado */
+    font-size: 1.5em; 
 }
 
 .modal-close-btn {
     background: none;
     border: none;
-    font-size: 1.5em; /* Tamanho ajustado */
+    font-size: 1.5em; 
     cursor: pointer;
     color: var(--secondary-orange);
     transition: transform 0.2s;
@@ -872,18 +871,18 @@ a {
 }
 
 .whatsapp-checkout-btn {
-    background-color: #25D366; /* Cor do WhatsApp */
+    background-color: #d55f04; 
     color: white;
     padding: 15px;
     font-size: 1.1em;
     width: 100%;
     margin-top: 10px;
-    border-radius: 25px; /* Consistente com os outros botões */
+    border-radius: 15px; 
     font-weight: 700;
 }
 
 .whatsapp-checkout-btn:hover:not(:disabled) {
-    background-color: #128C7E;
+    background-color: #a95829;
 }
 
 .whatsapp-checkout-btn:disabled {
@@ -893,7 +892,7 @@ a {
 }
 
 
-/* --- MEDIA QUERIES PARA RESPONSIVIDADE --- */
+
 
 @media (max-width: 1024px) {
     .tt-header {
@@ -1014,7 +1013,7 @@ a {
     }
 
     .enhanced-grid {
-        grid-template-columns: 1fr; /* Coluna única em mobile */
+        grid-template-columns: 1fr;
     }
 
     .footer-content {
@@ -1025,7 +1024,7 @@ a {
         text-align: left;
     }
     
-    /* Modal adjustment for smaller screens */
+
     .cart-modal {
         padding: 20px;
     }
@@ -1042,13 +1041,33 @@ a {
     }
 }
 
-/* Garante que o sidebar esteja oculto em telas maiores */
+
 @media (min-width: 769px) {
     .mobile-sidebar, .sidebar-overlay {
         display: none !important; 
     }
 }
-/* No seu Home.css */
+
 .header-cta i {
-    margin-right: 8px; /* Adiciona um espaço à direita do ícone */
+    margin-right: 8px; 
+
+}
+@media (max-width: 768px) {
+    .enhanced-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        width: 90%; 
+        margin: 0 auto; 
+    }
+
+    .enhanced-card {
+        min-height: 200px; 
+        width: 100%; 
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .slider-container {
+        height: 220px; 
+    }
 }
