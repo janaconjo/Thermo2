@@ -1,10 +1,10 @@
-// script.js
 
-// --- CONSTANTES ---
+
+
 const WHATSAPP_NUMBER = "258875193816";
-const SLIDE_INTERVAL = 3000; // 3 segundos
+const SLIDE_INTERVAL = 3000;
 
-// --- DADOS DO PRODUTO (Base de Dados) ---
+
 const initialProducts = [
     { 
         id: 1, 
@@ -32,7 +32,7 @@ const initialProducts = [
     },
     { 
         id: 3, 
-        name: "Impressora Térmica Ultra", 
+        name: "Impressora Térmica ", 
         size: "80x80 mm", 
         price: 570.00, 
         stock: "Em Estoque", 
@@ -44,17 +44,11 @@ const initialProducts = [
     }, 
 ];
 
-// --- ESTADO GLOBAL (Substitui o useState) ---
+
 let cartItems = [];
 let currentSlideIndex = {};
 let slideInterval;
 
-
-// --- FUNÇÕES DE LÓGICA E RENDERIZAÇÃO ---
-
-/**
- * Renderiza a lista de produtos no catálogo e adiciona listeners.
- */
 function renderProductGrid() {
     const productGrid = document.getElementById('product-grid');
     if (!productGrid) return;
@@ -63,7 +57,6 @@ function renderProductGrid() {
         const currentImage = product.gallery[currentSlideIndex[product.id] || 0];
         const stockStatusClass = `status-${product.stock.split(' ')[0].toLowerCase()}`;
         
-        // Retorna a string HTML do card de produto
         return `
             <div class="product-card enhanced-card" data-product-id="${product.id}">
                 <div class="card-image-box slider-container">
@@ -109,7 +102,6 @@ function renderProductGrid() {
         `;
     }).join('');
 
-    // Adiciona o listener DEPOIS que o HTML foi renderizado
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = parseInt(e.currentTarget.dataset.productId);
@@ -121,9 +113,7 @@ function renderProductGrid() {
     });
 }
 
-/**
- * Renderiza o conteúdo do modal de carrinho e atualiza contadores.
- */
+
 function renderCartModal() {
     const cartList = document.getElementById('cart-items-list');
     const cartTotalElement = document.getElementById('cart-total');
@@ -132,20 +122,17 @@ function renderCartModal() {
     const checkoutBtn = document.getElementById('whatsapp-checkout-btn');
     
     const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    // Atualiza o contador do carrinho no Header/Sidebar
+ 
     cartCountElements.forEach(el => el.textContent = cartItems.length);
 
-    // Esconde/Mostra a mensagem de carrinho vazio
     emptyMessage.style.display = cartItems.length === 0 ? 'block' : 'none';
 
-    // Atualiza o total
+ 
     cartTotalElement.textContent = total.toFixed(2) + ' MZN';
     
-    // Habilita/Desabilita o botão de checkout
+  
     checkoutBtn.disabled = cartItems.length === 0;
 
-    // Constrói a lista de itens do carrinho
     cartList.innerHTML = cartItems.map(item => `
         <div class="cart-item-modal" data-product-id="${item.id}">
             <div class="item-details">
@@ -161,7 +148,7 @@ function renderCartModal() {
         </div>
     `).join('');
 
-    // Adiciona listeners para os botões de quantidade
+   
     document.querySelectorAll('#cart-items-list .quantity-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = parseInt(e.currentTarget.dataset.id);
@@ -171,9 +158,9 @@ function renderCartModal() {
     });
 }
 
-/**
- * Adiciona um produto ao carrinho ou aumenta sua quantidade.
- */
+
+ // Adiciona um produto ao carrinho 
+ 
 function addToCart(product) {
     const existingItem = cartItems.find(item => item.id === product.id);
     if (existingItem) {
@@ -182,12 +169,11 @@ function addToCart(product) {
         cartItems.push({ ...product, quantity: 1 });
     }
     renderCartModal();
-    openCartModal(); // Abre o modal automaticamente
+    openCartModal(); 
 }
 
-/**
- * Atualiza a quantidade de um item no carrinho.
- */
+// Atualiza a quantidade de um item no carrinho.
+
 function updateQuantity(productId, change) {
     const itemIndex = cartItems.findIndex(item => item.id === productId);
     
@@ -195,15 +181,13 @@ function updateQuantity(productId, change) {
         cartItems[itemIndex].quantity += change;
         
         if (cartItems[itemIndex].quantity <= 0) {
-            cartItems.splice(itemIndex, 1); // Remove o item
+            cartItems.splice(itemIndex, 1);
         }
     }
     renderCartModal();
 }
 
-/**
- * Gera a mensagem de pedido e abre o link do WhatsApp.
- */
+
 function generateWhatsAppLink() {
     if (cartItems.length === 0) {
         alert("Seu carrinho está vazio.");
@@ -223,20 +207,20 @@ function generateWhatsAppLink() {
 }
 
 
-// --- FUNÇÕES DE CONTROLE DE INTERFACE (Modal e Sidebar) ---
+
 
 function openCartModal() {
     const modalOverlay = document.getElementById('cart-modal-overlay');
     modalOverlay.style.display = 'flex';
     document.body.classList.add('modal-open');
-    clearInterval(slideInterval); // Pausa o carrossel
+    clearInterval(slideInterval); 
 }
 
 function closeCartModal() {
     const modalOverlay = document.getElementById('cart-modal-overlay');
     modalOverlay.style.display = 'none';
     document.body.classList.remove('modal-open');
-    startSlideShow(); // Reinicia o carrossel
+    startSlideShow(); 
 }
 
 function toggleSidebar() {
@@ -253,14 +237,12 @@ function closeSidebar() {
     overlay.classList.remove('is-open');
 }
 
-/**
- * Lógica do Carrossel de Imagens.
- */
+
 function startSlideShow() {
     clearInterval(slideInterval); 
     
     slideInterval = setInterval(() => {
-        // Atualiza o índice do slide para cada produto
+    
         initialProducts.forEach(product => {
             const totalImages = product.gallery.length;
             const current = currentSlideIndex[product.id] || 0;
@@ -272,46 +254,39 @@ function startSlideShow() {
     }, SLIDE_INTERVAL);
 }
 
-
-// --- INICIALIZAÇÃO E LISTENERS (Executado no carregamento da página) ---
-
-document.addEventListener('DOMContentLoaded', () => {
     // 1. Inicializa os índices do carrossel
+document.addEventListener('DOMContentLoaded', () => {
     initialProducts.forEach(product => {
         currentSlideIndex[product.id] = 0;
     });
 
-    // 2. Renderiza o catálogo e o carrinho (para inicializar contadores)
     renderProductGrid();
     renderCartModal();
     
-    // 3. Inicia o carrossel
     startSlideShow();
     
-    // 4. Atualiza o ano no footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // 5. Configura Listeners do Modal
     document.getElementById('cart-open-btn').addEventListener('click', openCartModal);
     document.getElementById('cart-close-btn').addEventListener('click', closeCartModal);
     document.getElementById('cart-modal-overlay').addEventListener('click', (e) => {
         if (e.target.id === 'cart-modal-overlay') {
-            closeCartModal(); // Fecha clicando no fundo
+            closeCartModal();
         }
     });
     document.getElementById('whatsapp-checkout-btn').addEventListener('click', generateWhatsAppLink);
     
-    // 6. Configura Listeners da Sidebar
+ 
     document.getElementById('menu-toggle-btn').addEventListener('click', toggleSidebar);
     document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
     
-    // Listener para o botão 'Ver Pedido' na Sidebar
+    
     document.getElementById('sidebar-cart-btn').addEventListener('click', () => {
         openCartModal();
         closeSidebar();
     });
     
-    // Fecha a sidebar ao clicar em links de navegação
+    
     document.querySelectorAll('#mobile-sidebar .sidebar-link').forEach(link => {
         link.addEventListener('click', closeSidebar);
     });
