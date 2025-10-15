@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thermo Tech - Impressoras e Rolos Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="Home.css"> 
 </head>
 <body>
@@ -27,7 +28,7 @@
             </nav>
         
             <button class="header-cta" id="cart-open-btn">
-                Meu Pedido (<span id="cart-count">0</span>)
+                <i class="fas fa-shopping-cart"></i> Meu Pedido (<span id="cart-count">0</span>)
             </button>
         </div>
 
@@ -39,7 +40,7 @@
                 <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
             </ul>
             <button class="cta-button orange-button" id="sidebar-cart-btn">
-                Ver Pedido (<span id="sidebar-cart-count">0</span>)
+                <i class="fas fa-shopping-cart"></i> Ver Pedido (<span id="sidebar-cart-count">0</span>)
             </button>
         </nav>
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -50,7 +51,7 @@
         <section class="tt-hero-section" id="home">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    Impressoras Térmicas <br>e Rolos  <span>Premium</span>
+                    Impressoras Térmicas <br>e Rolos  <span>Premium</span>
                 </h1>
                 <p class="hero-subtitle">
                     Tudo que você precisa em um só lugar. Nossas soluções vão desde a impressora de alta performance até os rolos de papel premium.
@@ -216,5 +217,9 @@
     </div>
 
     <script src="Home.js"></script>
+    <script>
+        // JS simples para o ano atual
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
