@@ -1,11 +1,20 @@
-
-
-
 const WHATSAPP_NUMBER = "258875193816";
 const SLIDE_INTERVAL = 3000;
 
 
 const initialProducts = [
+      { 
+        id: 2, 
+        name: "Rolo Térmico", 
+        size: "57x40 mm", 
+        price: 1200.00, 
+        stock: "Em Estoque", 
+        gallery: [
+            "/assets/rolo57x40mm.jpg", 
+            "/assets/rolotermico57x40mm.jpg", 
+            "/assets/rolo termico57x40mm 2.webp"  
+        ]
+    },
     { 
         id: 1, 
         name: "Rolo Térmico", 
@@ -15,26 +24,15 @@ const initialProducts = [
         gallery: [
             "/assets/rolo-termico3.webp", 
             "/assets/rolo80x80.jpg", 
-            "/assets/rolo80x80-2.webp"  
+            "/assets/rolo80x80-2.webp"  
         ]
     },
-    { 
-        id: 2, 
-        name: "Rolo Térmico", 
-        size: "57x40 mm", 
-        price: 1200.00, 
-        stock: "Em Estoque", 
-        gallery: [
-            "/assets/rolo57x40mm.jpg", 
-            "/assets/rolotermico57x40mm.jpg", 
-            "/assets/rolo termico57x40mm 2.webp"  
-        ]
-    },
+  
     { 
         id: 3, 
         name: "Impressora Térmica ", 
         size: "80x80 mm", 
-        price: 570.00, 
+        price: 2700.00, 
         stock: "Em Estoque", 
         gallery: [
             "/assets/impressora3.jpg", 
@@ -46,15 +44,22 @@ const initialProducts = [
 
 
 let cartItems = [];
-let currentSlideIndex = {};
+
+let currentSlideIndex = initialProducts.reduce((acc, product) => {
+    acc[product.id] = 0;
+    return acc;
+}, {});
+
 let slideInterval;
+
+
 
 function renderProductGrid() {
     const productGrid = document.getElementById('product-grid');
     if (!productGrid) return;
     
     productGrid.innerHTML = initialProducts.map(product => {
-        const currentImage = product.gallery[currentSlideIndex[product.id] || 0];
+        const currentImage = product.gallery[currentSlideIndex[product.id]];
         const stockStatusClass = `status-${product.stock.split(' ')[0].toLowerCase()}`;
         
         return `
@@ -66,6 +71,7 @@ function renderProductGrid() {
                         ${product.gallery.map((_, index) => `
                             <span 
                                 class="indicator ${index === currentSlideIndex[product.id] ? 'active' : ''}"
+                                data-index="${index}"
                             ></span>
                         `).join('')}
                     </div>
@@ -101,16 +107,40 @@ function renderProductGrid() {
             </div>
         `;
     }).join('');
+}
+function updateProductSlides() {
+    initialProducts.forEach(product => {
+        const totalImages = product.gallery.length;
+        const current = currentSlideIndex[product.id] || 0;
+        
+  
+        const next = (current + 1) % totalImages;
+        currentSlideIndex[product.id] = next;
 
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const productId = parseInt(e.currentTarget.dataset.productId);
-            const product = initialProducts.find(p => p.id === productId);
-            if (product) {
-                addToCart(product);
+        const productCard = document.querySelector(`.product-card[data-product-id="${product.id}"]`);
+        
+        if (productCard) {
+            const sliderImage = productCard.querySelector('.slider-image');
+            const indicators = productCard.querySelectorAll('.indicator');
+            
+       
+            if (sliderImage) {
+                sliderImage.src = product.gallery[next];
             }
-        });
+
+            indicators.forEach((indicator, index) => {
+                indicator.classList.remove('active');
+                if (index === next) {
+                    indicator.classList.add('active');
+                }
+            });
+        }
     });
+}
+
+function startSlideShow() {
+    clearInterval(slideInterval); 
+    slideInterval = setInterval(updateProductSlides, SLIDE_INTERVAL);
 }
 
 
@@ -127,10 +157,8 @@ function renderCartModal() {
 
     emptyMessage.style.display = cartItems.length === 0 ? 'block' : 'none';
 
- 
     cartTotalElement.textContent = total.toFixed(2) + ' MZN';
     
-  
     checkoutBtn.disabled = cartItems.length === 0;
 
     cartList.innerHTML = cartItems.map(item => `
@@ -159,8 +187,7 @@ function renderCartModal() {
 }
 
 
- // Adiciona um produto ao carrinho 
- 
+// Adiciona um produto ao carrinho 
 function addToCart(product) {
     const existingItem = cartItems.find(item => item.id === product.id);
     if (existingItem) {
@@ -173,7 +200,6 @@ function addToCart(product) {
 }
 
 // Atualiza a quantidade de um item no carrinho.
-
 function updateQuantity(productId, change) {
     const itemIndex = cartItems.findIndex(item => item.id === productId);
     
@@ -202,11 +228,10 @@ function generateWhatsAppLink() {
     message += `\nTOTAL DO PEDIDO: ${total.toFixed(2)} MZN\n`;
     
     const encodedMessage = encodeURIComponent(message);
+
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
 }
-
-
 
 
 function openCartModal() {
@@ -238,35 +263,15 @@ function closeSidebar() {
 }
 
 
-function startSlideShow() {
-    clearInterval(slideInterval); 
-    
-    slideInterval = setInterval(() => {
-    
-        initialProducts.forEach(product => {
-            const totalImages = product.gallery.length;
-            const current = currentSlideIndex[product.id] || 0;
-            currentSlideIndex[product.id] = (current + 1) % totalImages;
-        });
-        
-        // Re-renderiza o catálogo para atualizar as imagens
-        renderProductGrid();
-    }, SLIDE_INTERVAL);
-}
-
-    // 1. Inicializa os índices do carrossel
 document.addEventListener('DOMContentLoaded', () => {
-    initialProducts.forEach(product => {
-        currentSlideIndex[product.id] = 0;
-    });
-
     renderProductGrid();
     renderCartModal();
-    
     startSlideShow();
     
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+   
+    document.getElementById('current-year-footer').textContent = new Date().getFullYear();
 
+    //Modal do Carrinho
     document.getElementById('cart-open-btn').addEventListener('click', openCartModal);
     document.getElementById('cart-close-btn').addEventListener('click', closeCartModal);
     document.getElementById('cart-modal-overlay').addEventListener('click', (e) => {
@@ -276,18 +281,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('whatsapp-checkout-btn').addEventListener('click', generateWhatsAppLink);
     
- 
+    // Listeners da Sidebar Mobile
     document.getElementById('menu-toggle-btn').addEventListener('click', toggleSidebar);
     document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
-    
     
     document.getElementById('sidebar-cart-btn').addEventListener('click', () => {
         openCartModal();
         closeSidebar();
     });
     
-    
+    // Fecha a sidebar ao clicar em um link
     document.querySelectorAll('#mobile-sidebar .sidebar-link').forEach(link => {
         link.addEventListener('click', closeSidebar);
     });
+
+   
+    const productGrid = document.getElementById('product-grid');
+    if (productGrid) {
+        productGrid.addEventListener('click', (e) => {
+            const button = e.target.closest('.add-to-cart-btn');
+            
+            if (button && !button.disabled) {
+                const productId = parseInt(button.dataset.productId);
+                const product = initialProducts.find(p => p.id === productId);
+                if (product) {
+                    addToCart(product);
+                }
+            }
+        });
+    }
 });

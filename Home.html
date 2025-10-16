@@ -20,7 +20,7 @@
             
             <nav class="header-nav">
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#home">Início</a></li>
                     <li><a href="#catalogo">Catálogo</a></li>
                     <li><a href="#sobre">Sobre Nós</a></li>
                     <li><a href="#contacto">Contacto</a></li>
@@ -34,7 +34,7 @@
 
         <nav class="mobile-sidebar" id="mobile-sidebar">
             <ul>
-                <li><a href="#home" class="sidebar-link">Home</a></li>
+                <li><a href="#home" class="sidebar-link">Início</a></li>
                 <li><a href="#catalogo" class="sidebar-link">Catálogo</a></li>
                 <li><a href="#sobre" class="sidebar-link">Sobre Nós</a></li>
                 <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
@@ -47,6 +47,7 @@
     </header>
 
     <main>
+         <!-- home-->
         
         <section class="tt-hero-section" id="home">
             <div class="hero-content">
@@ -70,6 +71,8 @@
                 <div class="design-shape-orange"></div>
             </div>
         </section>
+
+         <!-- status-->
 
         <section class="tt-stats-bar">
             <div class="stat-item">
@@ -96,7 +99,8 @@
                 <img src="/assets/impressora4.webp" alt="Impressora">
             </div>
         </section>
-
+        
+ <!-- sobre nós-->
         <section id="sobre" class="tt-about-section">
             <div class="about-header">
                 <h2>Sobre Nós</h2>
@@ -108,6 +112,19 @@
                         <span class="quote-icon">“</span>
                         Nosso compromisso é com a excelência em cada produto e o suporte total aos nossos parceiros.
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalogo-->
+          <section id="catalogo" class="tt-catalog-section">
+            <h1 class="main-title">Catálogo</h1>
+            <p class="products-intro">
+                Veja nossa seleção de impressoras e rolos, e adicione ao seu pedido!
+            </p>
+            
+            <div class="products-section">
+                <div class="product-grid enhanced-grid" id="product-grid">
                 </div>
             </div>
         </section>
@@ -148,18 +165,6 @@
             </div>
         </section>
 
-        <section id="catalogo" class="tt-catalog-section">
-            <h1 class="main-title">Catálogo</h1>
-            <p class="products-intro">
-                Veja nossa seleção de impressoras e rolos, e adicione ao seu pedido!
-            </p>
-            
-            <div class="products-section">
-                <div class="product-grid enhanced-grid" id="product-grid">
-                    </div>
-            </div>
-        </section>
-        
     </main>
     
     <footer class="tt-footer" id="contacto">
@@ -185,7 +190,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span id="current-year"></span> Thermo Tech. Todos os direitos reservados.</p>
+            <p>&copy; <span id="current-year-footer"></span> Thermo Tech. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -197,7 +202,7 @@
             </div>
             
             <div class="cart-items-list-modal" id="cart-items-list">
-                </div>
+            </div>
 
             <p class="empty-cart" id="empty-cart-message">Seu carrinho está vazio.</p>
 
@@ -209,17 +214,12 @@
             <button 
                 class="whatsapp-checkout-btn modal-cta" 
                 id="whatsapp-checkout-btn"
-                disabled
-            >
+                disabled >
                 Finalizar Pedido
             </button>
         </div>
     </div>
 
     <script src="Home.js"></script>
-    <script>
-       
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>
